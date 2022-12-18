@@ -15809,135 +15809,101 @@ memory usage: 850.6 KB
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
 <pre>Warning: path already exists! This predictor may overwrite an existing predictor! path=&#34;saved_models&#34;
+Presets specified: [&#39;best_quality&#39;]
+Stack configuration (auto_stack=True): num_stack_levels=1, num_bag_folds=8, num_bag_sets=20
+Beginning AutoGluon training ... Time limit = 600s
+AutoGluon will save models to &#34;saved_models/&#34;
+AutoGluon Version:  0.6.0
+Python Version:     3.9.12
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #62~20.04.1-Ubuntu SMP Tue Nov 22 21:24:20 UTC 2022
+Train Data Rows:    10886
+Train Data Columns: 9
+Label Column: count
+Preprocessing data ...
+AutoGluon infers your prediction problem is: &#39;regression&#39; (because dtype of label-column == int and many unique label-values observed).
+	Label info (max, min, mean, stddev): (977, 1, 191.57413, 181.14445)
+	If &#39;regression&#39; is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: [&#39;binary&#39;, &#39;multiclass&#39;, &#39;regression&#39;])
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+	Available Memory:                    5737.26 MB
+	Train Data (Original)  Memory Usage: 0.78 MB (0.0% of available memory)
+	Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+	Stage 1 Generators:
+		Fitting AsTypeFeatureGenerator...
+			Note: Converting 2 features to boolean dtype as they only contain 2 unique values.
+	Stage 2 Generators:
+		Fitting FillNaFeatureGenerator...
+	Stage 3 Generators:
+		Fitting IdentityFeatureGenerator...
+		Fitting DatetimeFeatureGenerator...
+	Stage 4 Generators:
+		Fitting DropUniqueFeatureGenerator...
+	Types of features in original data (raw dtype, special dtypes):
+		(&#39;datetime&#39;, []) : 1 | [&#39;datetime&#39;]
+		(&#39;float&#39;, [])    : 3 | [&#39;temp&#39;, &#39;atemp&#39;, &#39;windspeed&#39;]
+		(&#39;int&#39;, [])      : 5 | [&#39;season&#39;, &#39;holiday&#39;, &#39;workingday&#39;, &#39;weather&#39;, &#39;humidity&#39;]
+	Types of features in processed data (raw dtype, special dtypes):
+		(&#39;float&#39;, [])                : 3 | [&#39;temp&#39;, &#39;atemp&#39;, &#39;windspeed&#39;]
+		(&#39;int&#39;, [])                  : 3 | [&#39;season&#39;, &#39;weather&#39;, &#39;humidity&#39;]
+		(&#39;int&#39;, [&#39;bool&#39;])            : 2 | [&#39;holiday&#39;, &#39;workingday&#39;]
+		(&#39;int&#39;, [&#39;datetime_as_int&#39;]) : 5 | [&#39;datetime&#39;, &#39;datetime.year&#39;, &#39;datetime.month&#39;, &#39;datetime.day&#39;, &#39;datetime.dayofweek&#39;]
+	0.1s = Fit runtime
+	9 features in original data used to generate 13 features in processed data.
+	Train Data (Processed) Memory Usage: 0.98 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.16s ...
+AutoGluon will gauge predictive performance using evaluation metric: &#39;mean_absolute_error&#39;
+	This metric&#39;s sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	To change this, specify the eval_metric parameter of Predictor()
+AutoGluon will fit 2 stack levels (L1 to L2) ...
+Fitting 11 L1 models ...
+Fitting model: KNeighborsUnif_BAG_L1 ... Training model for up to 399.8s of the 599.84s of remaining time.
+	-64.7379	 = Validation score   (-mean_absolute_error)
+	0.05s	 = Training   runtime
+	0.05s	 = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ... Training model for up to 399.63s of the 599.68s of remaining time.
+	-52.0474	 = Validation score   (-mean_absolute_error)
+	0.03s	 = Training   runtime
+	0.03s	 = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ... Training model for up to 399.54s of the 599.59s of remaining time.
+	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
+	Warning: Exception caused LightGBMXT_BAG_L1 to fail during training... Skipping this model.
+		The task&#39;s local raylet died. Check raylet.out for more information.
+Detailed Traceback:
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/trainer/abstract_trainer.py&#34;, line 1422, in _train_and_save
+    model = self._train_single(X, y, model, X_val, y_val, total_resources=total_resources, **model_fit_kwargs)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/trainer/abstract_trainer.py&#34;, line 1367, in _train_single
+    model = model.fit(X=X, y=y, X_val=X_val, y_val=y_val, total_resources=total_resources, **model_fit_kwargs)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/models/abstract/abstract_model.py&#34;, line 628, in fit
+    out = self._fit(**kwargs)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/models/ensemble/stacker_ensemble_model.py&#34;, line 154, in _fit
+    return super()._fit(X=X, y=y, time_limit=time_limit, **kwargs)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/models/ensemble/bagged_ensemble_model.py&#34;, line 236, in _fit
+    self._fit_folds(X=X, y=y, model_base=model_base, X_pseudo=X_pseudo, y_pseudo=y_pseudo,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/models/ensemble/bagged_ensemble_model.py&#34;, line 515, in _fit_folds
+    fold_fitting_strategy.after_all_folds_scheduled()
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/models/ensemble/fold_fitting_strategy.py&#34;, line 498, in after_all_folds_scheduled
+    raise processed_exception
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/models/ensemble/fold_fitting_strategy.py&#34;, line 466, in after_all_folds_scheduled
+    time_end_fit, predict_time, predict_1_time = self.ray.get(finished)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/ray/_private/client_mode_hook.py&#34;, line 105, in wrapper
+    return func(*args, **kwargs)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/ray/_private/worker.py&#34;, line 2282, in get
+    raise value
+ray.exceptions.LocalRayletDiedError: The task&#39;s local raylet died. Check raylet.out for more information.
+Completed 1/20 k-fold bagging repeats ...
+Fitting model: WeightedEnsemble_L2 ... Training model for up to 360.0s of the -15333.02s of remaining time.
+	-52.0474	 = Validation score   (-mean_absolute_error)
+	0.42s	 = Training   runtime
+	0.0s	 = Validation runtime
+Fitting 9 L2 models ...
+Completed 1/20 k-fold bagging repeats ...
+No base models to train on, skipping auxiliary stack level 3...
+AutoGluon training complete, total runtime = 15933.54s ... Best model: &#34;WeightedEnsemble_L2&#34;
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;saved_models/&#34;)
 </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[219], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> predictor = TabularPredictor(label=&#39;count&#39;,
-<span class="ansi-green-intense-fg ansi-bold">      2</span>                             eval_metric=&#39;R2&#39;,
-<span class="ansi-green-intense-fg ansi-bold">      3</span>                             path=model_save_path,
-<span class="ansi-green-intense-fg ansi-bold">      4</span>                                                 ).fit(train,
-<span class="ansi-green-intense-fg ansi-bold">      5</span>                                                time_limit=600,
-<span class="ansi-green-intense-fg ansi-bold">      6</span>                                                presets=&#39;best_quality&#39;)
-
-File <span class="ansi-green-fg">/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/tabular/predictor/predictor.py:217</span>, in <span class="ansi-cyan-fg">TabularPredictor.__init__</span><span class="ansi-blue-fg">(self, label, problem_type, eval_metric, path, verbosity, sample_weight, weight_evaluation, groups, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    214</span> learner_kwargs = kwargs.pop(&#39;learner_kwargs&#39;, dict())
-<span class="ansi-green-intense-fg ansi-bold">    215</span> quantile_levels = kwargs.get(&#39;quantile_levels&#39;, None)
-<span class="ansi-green-fg">--&gt; 217</span> self._learner: AbstractTabularLearner = learner_type(path_context=path, label=label, feature_generator=None,
-<span class="ansi-green-intense-fg ansi-bold">    218</span>                                                      eval_metric=eval_metric, problem_type=problem_type,
-<span class="ansi-green-intense-fg ansi-bold">    219</span>                                                      quantile_levels=quantile_levels,
-<span class="ansi-green-intense-fg ansi-bold">    220</span>                                                      sample_weight=self.sample_weight,
-<span class="ansi-green-intense-fg ansi-bold">    221</span>                                                      weight_evaluation=self.weight_evaluation, groups=groups,
-<span class="ansi-green-intense-fg ansi-bold">    222</span>                                                      **learner_kwargs)
-<span class="ansi-green-intense-fg ansi-bold">    223</span> self._learner_type = type(self._learner)
-<span class="ansi-green-intense-fg ansi-bold">    224</span> self._trainer = None
-
-File <span class="ansi-green-fg">/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/tabular/learner/default_learner.py:32</span>, in <span class="ansi-cyan-fg">DefaultLearner.__init__</span><span class="ansi-blue-fg">(self, trainer_type, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     31</span> def __init__(self, trainer_type=AutoTrainer, **kwargs):
-<span class="ansi-green-fg">---&gt; 32</span>     super().__init__(**kwargs)
-<span class="ansi-green-intense-fg ansi-bold">     33</span>     self.trainer_type = trainer_type
-<span class="ansi-green-intense-fg ansi-bold">     34</span>     self.class_weights = None
-
-File <span class="ansi-green-fg">/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/tabular/learner/abstract_learner.py:42</span>, in <span class="ansi-cyan-fg">AbstractTabularLearner.__init__</span><span class="ansi-blue-fg">(self, path_context, label, feature_generator, ignored_columns, label_count_threshold, problem_type, quantile_levels, eval_metric, positive_class, cache_data, is_trainer_present, random_state, sample_weight, weight_evaluation, groups)</span>
-<span class="ansi-green-intense-fg ansi-bold">     40</span> self.threshold = label_count_threshold
-<span class="ansi-green-intense-fg ansi-bold">     41</span> self.problem_type = problem_type
-<span class="ansi-green-fg">---&gt; 42</span> self.eval_metric = get_metric(eval_metric, self.problem_type, &#39;eval_metric&#39;)
-<span class="ansi-green-intense-fg ansi-bold">     44</span> if self.problem_type == QUANTILE and quantile_levels is None:
-<span class="ansi-green-intense-fg ansi-bold">     45</span>     raise ValueError(&#34;if `problem_type=&#39;quantile&#39;`, `quantile_levels` has to be specified&#34;)
-
-File <span class="ansi-green-fg">/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/metrics/__init__.py:655</span>, in <span class="ansi-cyan-fg">get_metric</span><span class="ansi-blue-fg">(metric, problem_type, metric_type)</span>
-<span class="ansi-green-intense-fg ansi-bold">    652</span>         all_available_metrics[pt] = list(METRICS[pt].keys())
-<span class="ansi-green-intense-fg ansi-bold">    653</span>     all_available_metrics[SOFTCLASS] = [&#39;soft_log_loss&#39;]
-<span class="ansi-green-fg">--&gt; 655</span>     raise ValueError(
-<span class="ansi-green-intense-fg ansi-bold">    656</span>         f&#34;{metric_type}=&#39;{metric}&#39; is an unknown metric, all available metrics by problem_type are:\n&#34;
-<span class="ansi-green-intense-fg ansi-bold">    657</span>         f&#34;{json.dumps(all_available_metrics, indent=2)}\n&#34;
-<span class="ansi-green-intense-fg ansi-bold">    658</span>         f&#34;You can also refer to &#34;
-<span class="ansi-green-intense-fg ansi-bold">    659</span>         f&#34;autogluon.core.metrics to see how to define your own {metric_type} function&#34;
-<span class="ansi-green-intense-fg ansi-bold">    660</span>     )
-<span class="ansi-green-intense-fg ansi-bold">    661</span> else:
-<span class="ansi-green-intense-fg ansi-bold">    662</span>     return metric
-
-<span class="ansi-red-fg">ValueError</span>: eval_metric=&#39;R2&#39; is an unknown metric, all available metrics by problem_type are:
-{
-  &#34;binary&#34;: [
-    &#34;accuracy&#34;,
-    &#34;acc&#34;,
-    &#34;balanced_accuracy&#34;,
-    &#34;mcc&#34;,
-    &#34;roc_auc_ovo_macro&#34;,
-    &#34;log_loss&#34;,
-    &#34;nll&#34;,
-    &#34;pac&#34;,
-    &#34;pac_score&#34;,
-    &#34;quadratic_kappa&#34;,
-    &#34;roc_auc&#34;,
-    &#34;average_precision&#34;,
-    &#34;precision&#34;,
-    &#34;precision_macro&#34;,
-    &#34;precision_micro&#34;,
-    &#34;precision_weighted&#34;,
-    &#34;recall&#34;,
-    &#34;recall_macro&#34;,
-    &#34;recall_micro&#34;,
-    &#34;recall_weighted&#34;,
-    &#34;f1&#34;,
-    &#34;f1_macro&#34;,
-    &#34;f1_micro&#34;,
-    &#34;f1_weighted&#34;
-  ],
-  &#34;multiclass&#34;: [
-    &#34;accuracy&#34;,
-    &#34;acc&#34;,
-    &#34;balanced_accuracy&#34;,
-    &#34;mcc&#34;,
-    &#34;roc_auc_ovo_macro&#34;,
-    &#34;log_loss&#34;,
-    &#34;nll&#34;,
-    &#34;pac&#34;,
-    &#34;pac_score&#34;,
-    &#34;quadratic_kappa&#34;,
-    &#34;precision_macro&#34;,
-    &#34;precision_micro&#34;,
-    &#34;precision_weighted&#34;,
-    &#34;recall_macro&#34;,
-    &#34;recall_micro&#34;,
-    &#34;recall_weighted&#34;,
-    &#34;f1_macro&#34;,
-    &#34;f1_micro&#34;,
-    &#34;f1_weighted&#34;
-  ],
-  &#34;regression&#34;: [
-    &#34;r2&#34;,
-    &#34;mean_squared_error&#34;,
-    &#34;mse&#34;,
-    &#34;root_mean_squared_error&#34;,
-    &#34;rmse&#34;,
-    &#34;mean_absolute_error&#34;,
-    &#34;mae&#34;,
-    &#34;median_absolute_error&#34;,
-    &#34;mean_absolute_percentage_error&#34;,
-    &#34;mape&#34;,
-    &#34;spearmanr&#34;,
-    &#34;pearsonr&#34;
-  ],
-  &#34;quantile&#34;: [
-    &#34;pinball_loss&#34;,
-    &#34;pinball&#34;
-  ],
-  &#34;softclass&#34;: [
-    &#34;soft_log_loss&#34;
-  ]
-}
-You can also refer to autogluon.core.metrics to see how to define your own eval_metric function</pre>
 </div>
 </div>
 
@@ -15986,20 +15952,15 @@ You can also refer to autogluon.core.metrics to see how to define your own eval_
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>*** Summary of fit() ***
 Estimated performance of each model:
-                    model     score_val  pred_time_val   fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
-0     WeightedEnsemble_L3  -2780.473894       2.616587  16.127098                0.000871           0.248404            3       True          8
-1  RandomForestMSE_BAG_L2  -2841.889833       1.792298  12.605634                0.607480           7.302744            2       True          6
-2    ExtraTreesMSE_BAG_L2  -2857.055449       2.008236   8.575950                0.823418           3.273060            2       True          7
-3   KNeighborsDist_BAG_L1  -7077.025927       0.028709   0.035885                0.028709           0.035885            1       True          2
-4     WeightedEnsemble_L2  -7077.025927       0.029224   0.233334                0.000515           0.197449            2       True          5
-5   KNeighborsUnif_BAG_L1 -10311.630549       0.039671   0.038303                0.039671           0.038303            1       True          1
-6  RandomForestMSE_BAG_L1 -13583.520078       0.548587   3.405746                0.548587           3.405746            1       True          3
-7    ExtraTreesMSE_BAG_L1 -15525.328372       0.567850   1.822955                0.567850           1.822955            1       True          4
-Number of models trained: 8
+                   model  score_val  pred_time_val  fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
+0  KNeighborsDist_BAG_L1 -52.047413       0.026195  0.033352                0.026195           0.033352            1       True          2
+1    WeightedEnsemble_L2 -52.047413       0.027531  0.452341                0.001337           0.418989            2       True          3
+2  KNeighborsUnif_BAG_L1 -64.737939       0.047621  0.054048                0.047621           0.054048            1       True          1
+Number of models trained: 3
 Types of models trained:
-{&#39;StackerEnsembleModel_XT&#39;, &#39;StackerEnsembleModel_RF&#39;, &#39;StackerEnsembleModel_KNN&#39;, &#39;WeightedEnsembleModel&#39;}
+{&#39;StackerEnsembleModel_KNN&#39;, &#39;WeightedEnsembleModel&#39;}
 Bagging used: True  (with 8 folds)
-Multi-layer stack-ensembling used: True  (with 3 levels)
+Multi-layer stack-ensembling used: False 
 Feature Metadata (Processed):
 (raw dtype, special dtypes):
 (&#39;float&#39;, [])                : 3 | [&#39;temp&#39;, &#39;atemp&#39;, &#39;windspeed&#39;]
@@ -16031,47 +15992,22 @@ Feature Metadata (Processed):
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>{&#39;model_types&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: &#39;StackerEnsembleModel_KNN&#39;,
   &#39;KNeighborsDist_BAG_L1&#39;: &#39;StackerEnsembleModel_KNN&#39;,
-  &#39;RandomForestMSE_BAG_L1&#39;: &#39;StackerEnsembleModel_RF&#39;,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: &#39;StackerEnsembleModel_XT&#39;,
-  &#39;WeightedEnsemble_L2&#39;: &#39;WeightedEnsembleModel&#39;,
-  &#39;RandomForestMSE_BAG_L2&#39;: &#39;StackerEnsembleModel_RF&#39;,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: &#39;StackerEnsembleModel_XT&#39;,
-  &#39;WeightedEnsemble_L3&#39;: &#39;WeightedEnsembleModel&#39;},
- &#39;model_performance&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: -10311.630548500909,
-  &#39;KNeighborsDist_BAG_L1&#39;: -7077.025927256795,
-  &#39;RandomForestMSE_BAG_L1&#39;: -13583.520077562745,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: -15525.328371688269,
-  &#39;WeightedEnsemble_L2&#39;: -7077.025927256795,
-  &#39;RandomForestMSE_BAG_L2&#39;: -2841.889833168491,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: -2857.0554485658104,
-  &#39;WeightedEnsemble_L3&#39;: -2780.4738943921334},
- &#39;model_best&#39;: &#39;WeightedEnsemble_L3&#39;,
+  &#39;WeightedEnsemble_L2&#39;: &#39;WeightedEnsembleModel&#39;},
+ &#39;model_performance&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: -64.73793861720571,
+  &#39;KNeighborsDist_BAG_L1&#39;: -52.047412500976314,
+  &#39;WeightedEnsemble_L2&#39;: -52.047412500976314},
+ &#39;model_best&#39;: &#39;WeightedEnsemble_L2&#39;,
  &#39;model_paths&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: &#39;saved_models/models/KNeighborsUnif_BAG_L1/&#39;,
   &#39;KNeighborsDist_BAG_L1&#39;: &#39;saved_models/models/KNeighborsDist_BAG_L1/&#39;,
-  &#39;RandomForestMSE_BAG_L1&#39;: &#39;saved_models/models/RandomForestMSE_BAG_L1/&#39;,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: &#39;saved_models/models/ExtraTreesMSE_BAG_L1/&#39;,
-  &#39;WeightedEnsemble_L2&#39;: &#39;saved_models/models/WeightedEnsemble_L2/&#39;,
-  &#39;RandomForestMSE_BAG_L2&#39;: &#39;saved_models/models/RandomForestMSE_BAG_L2/&#39;,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: &#39;saved_models/models/ExtraTreesMSE_BAG_L2/&#39;,
-  &#39;WeightedEnsemble_L3&#39;: &#39;saved_models/models/WeightedEnsemble_L3/&#39;},
- &#39;model_fit_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.03830313682556152,
-  &#39;KNeighborsDist_BAG_L1&#39;: 0.03588461875915527,
-  &#39;RandomForestMSE_BAG_L1&#39;: 3.4057464599609375,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: 1.8229553699493408,
-  &#39;WeightedEnsemble_L2&#39;: 0.1974489688873291,
-  &#39;RandomForestMSE_BAG_L2&#39;: 7.302744388580322,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: 3.2730600833892822,
-  &#39;WeightedEnsemble_L3&#39;: 0.24840378761291504},
- &#39;model_pred_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.03967142105102539,
-  &#39;KNeighborsDist_BAG_L1&#39;: 0.02870941162109375,
-  &#39;RandomForestMSE_BAG_L1&#39;: 0.5485868453979492,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: 0.5678496360778809,
-  &#39;WeightedEnsemble_L2&#39;: 0.000514984130859375,
-  &#39;RandomForestMSE_BAG_L2&#39;: 0.6074802875518799,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: 0.823418378829956,
-  &#39;WeightedEnsemble_L3&#39;: 0.0008707046508789062},
+  &#39;WeightedEnsemble_L2&#39;: &#39;saved_models/models/WeightedEnsemble_L2/&#39;},
+ &#39;model_fit_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.05404829978942871,
+  &#39;KNeighborsDist_BAG_L1&#39;: 0.03335213661193848,
+  &#39;WeightedEnsemble_L2&#39;: 0.4189891815185547},
+ &#39;model_pred_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.04762077331542969,
+  &#39;KNeighborsDist_BAG_L1&#39;: 0.02619457244873047,
+  &#39;WeightedEnsemble_L2&#39;: 0.001336812973022461},
  &#39;num_bag_folds&#39;: 8,
- &#39;max_stack_level&#39;: 3,
+ &#39;max_stack_level&#39;: 2,
  &#39;model_hyperparams&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: {&#39;use_orig_features&#39;: True,
    &#39;max_base_models&#39;: 25,
    &#39;max_base_models_per_type&#39;: 5,
@@ -16082,63 +16018,24 @@ Feature Metadata (Processed):
    &#39;max_base_models_per_type&#39;: 5,
    &#39;save_bag_folds&#39;: True,
    &#39;use_child_oof&#39;: True},
-  &#39;RandomForestMSE_BAG_L1&#39;: {&#39;use_orig_features&#39;: True,
-   &#39;max_base_models&#39;: 25,
-   &#39;max_base_models_per_type&#39;: 5,
-   &#39;save_bag_folds&#39;: True,
-   &#39;use_child_oof&#39;: True},
-  &#39;ExtraTreesMSE_BAG_L1&#39;: {&#39;use_orig_features&#39;: True,
-   &#39;max_base_models&#39;: 25,
-   &#39;max_base_models_per_type&#39;: 5,
-   &#39;save_bag_folds&#39;: True,
-   &#39;use_child_oof&#39;: True},
   &#39;WeightedEnsemble_L2&#39;: {&#39;use_orig_features&#39;: False,
    &#39;max_base_models&#39;: 25,
    &#39;max_base_models_per_type&#39;: 5,
-   &#39;save_bag_folds&#39;: True},
-  &#39;RandomForestMSE_BAG_L2&#39;: {&#39;use_orig_features&#39;: True,
-   &#39;max_base_models&#39;: 25,
-   &#39;max_base_models_per_type&#39;: 5,
-   &#39;save_bag_folds&#39;: True,
-   &#39;use_child_oof&#39;: True},
-  &#39;ExtraTreesMSE_BAG_L2&#39;: {&#39;use_orig_features&#39;: True,
-   &#39;max_base_models&#39;: 25,
-   &#39;max_base_models_per_type&#39;: 5,
-   &#39;save_bag_folds&#39;: True,
-   &#39;use_child_oof&#39;: True},
-  &#39;WeightedEnsemble_L3&#39;: {&#39;use_orig_features&#39;: False,
-   &#39;max_base_models&#39;: 25,
-   &#39;max_base_models_per_type&#39;: 5,
    &#39;save_bag_folds&#39;: True}},
- &#39;leaderboard&#39;:                     model     score_val  pred_time_val   fit_time  \
- 0     WeightedEnsemble_L3  -2780.473894       2.616587  16.127098   
- 1  RandomForestMSE_BAG_L2  -2841.889833       1.792298  12.605634   
- 2    ExtraTreesMSE_BAG_L2  -2857.055449       2.008236   8.575950   
- 3   KNeighborsDist_BAG_L1  -7077.025927       0.028709   0.035885   
- 4     WeightedEnsemble_L2  -7077.025927       0.029224   0.233334   
- 5   KNeighborsUnif_BAG_L1 -10311.630549       0.039671   0.038303   
- 6  RandomForestMSE_BAG_L1 -13583.520078       0.548587   3.405746   
- 7    ExtraTreesMSE_BAG_L1 -15525.328372       0.567850   1.822955   
+ &#39;leaderboard&#39;:                    model  score_val  pred_time_val  fit_time  \
+ 0  KNeighborsDist_BAG_L1 -52.047413       0.026195  0.033352   
+ 1    WeightedEnsemble_L2 -52.047413       0.027531  0.452341   
+ 2  KNeighborsUnif_BAG_L1 -64.737939       0.047621  0.054048   
  
     pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  \
- 0                0.000871           0.248404            3       True   
- 1                0.607480           7.302744            2       True   
- 2                0.823418           3.273060            2       True   
- 3                0.028709           0.035885            1       True   
- 4                0.000515           0.197449            2       True   
- 5                0.039671           0.038303            1       True   
- 6                0.548587           3.405746            1       True   
- 7                0.567850           1.822955            1       True   
+ 0                0.026195           0.033352            1       True   
+ 1                0.001337           0.418989            2       True   
+ 2                0.047621           0.054048            1       True   
  
     fit_order  
- 0          8  
- 1          6  
- 2          7  
- 3          2  
- 4          5  
- 5          1  
- 6          3  
- 7          4  }</pre>
+ 0          2  
+ 1          3  
+ 2          1  }</pre>
 </div>
 
 </div>
@@ -16189,11 +16086,11 @@ Feature Metadata (Processed):
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>0    22.447363
-1    41.671761
-2    45.627254
-3    46.568134
-4    50.585644
+<pre>0    51.861626
+1    56.686295
+2    59.077763
+3    60.468830
+4    61.419930
 Name: count, dtype: float32</pre>
 </div>
 
@@ -16246,13 +16143,13 @@ Name: count, dtype: float32</pre>
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>count    6493.000000
-mean      100.192024
-std        90.331009
-min         2.129963
-25%        19.084469
-50%        62.764069
-75%       169.135544
-max       358.221191
+mean      113.056877
+std       100.272194
+min         3.424214
+25%        23.825022
+50%        74.273811
+75%       191.522415
+max       342.462982
 Name: count, dtype: float64</pre>
 </div>
 
@@ -16375,8 +16272,74 @@ Name: count, dtype: float64</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>100%|████████████████████████████████████████| 188k/188k [00:02&lt;00:00, 75.9kB/s]
-Successfully submitted to Bike Sharing Demand</pre>
+<pre>2022-12-18 21:45:58,222 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f68fb2d1850&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;)&#39;: /api/v1/competitions/bike-sharing-demand/submissions/url/192741/1671392756
+2022-12-18 21:45:58,223 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f68fb2d1be0&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;)&#39;: /api/v1/competitions/bike-sharing-demand/submissions/url/192741/1671392756
+2022-12-18 21:45:58,225 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f68fb2c0dc0&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;)&#39;: /api/v1/competitions/bike-sharing-demand/submissions/url/192741/1671392756
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connection.py&#34;, line 174, in _new_conn
+    conn = connection.create_connection(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/util/connection.py&#34;, line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File &#34;/home/akm/anaconda3/lib/python3.9/socket.py&#34;, line 954, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 703, in urlopen
+    httplib_response = self._make_request(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 386, in _make_request
+    self._validate_conn(conn)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 1042, in _validate_conn
+    conn.connect()
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connection.py&#34;, line 358, in connect
+    self.sock = conn = self._new_conn()
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connection.py&#34;, line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPSConnection object at 0x7f68fb2ab970&gt;: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/bin/kaggle&#34;, line 10, in &lt;module&gt;
+    sys.exit(main())
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/cli.py&#34;, line 67, in main
+    out = args.func(**command_args)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api/kaggle_api_extended.py&#34;, line 561, in competition_submit_cli
+    submit_result = self.competition_submit(file_name, message,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api/kaggle_api_extended.py&#34;, line 510, in competition_submit
+    self.competitions_submissions_url_with_http_info(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api/kaggle_api.py&#34;, line 1046, in competitions_submissions_url_with_http_info
+    return self.api_client.call_api(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api_client.py&#34;, line 329, in call_api
+    return self.__call_api(resource_path, method,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api_client.py&#34;, line 161, in __call_api
+    response_data = self.request(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api_client.py&#34;, line 371, in request
+    return self.rest_client.POST(url,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/rest.py&#34;, line 282, in POST
+    return self.request(&#34;POST&#34;, url,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/rest.py&#34;, line 194, in request
+    r = self.pool_manager.request(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/request.py&#34;, line 78, in request
+    return self.request_encode_body(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/request.py&#34;, line 170, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/poolmanager.py&#34;, line 376, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 815, in urlopen
+    return self.urlopen(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 815, in urlopen
+    return self.urlopen(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 815, in urlopen
+    return self.urlopen(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 787, in urlopen
+    retries = retries.increment(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/util/retry.py&#34;, line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=&#39;www.kaggle.com&#39;, port=443): Max retries exceeded with url: /api/v1/competitions/bike-sharing-demand/submissions/url/192741/1671392756 (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f68fb2ab970&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;))
+</pre>
 </div>
 </div>
 
@@ -16423,12 +16386,74 @@ Successfully submitted to Bike Sharing Demand</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>fileName                            date                 description                        status    publicScore  privateScore  
-----------------------------------  -------------------  ---------------------------------  --------  -----------  ------------  
-submission.csv                      2022-12-18 15:08:23  first raw submission               complete  1.84008      1.84008       
-submission.csv                      2022-12-18 15:04:41  first raw submission               complete  1.83709      1.83709       
-submission_added_new_features_.csv  2022-12-18 15:03:52  new features                       complete  0.63296      0.63296       
-submission_new_hpo.csv              2022-12-18 15:01:20  new features with hyperparameters  complete  0.63296      0.63296       
+<pre>E1218 21:45:58.697246305 1106232 backup_poller.cc:134]       Run client channel backup poller: {&#34;created&#34;:&#34;@1671392758.697191950&#34;,&#34;description&#34;:&#34;pollset_work&#34;,&#34;file&#34;:&#34;src/core/lib/iomgr/ev_epollex_linux.cc&#34;,&#34;file_line&#34;:320,&#34;referenced_errors&#34;:[{&#34;created&#34;:&#34;@1671392758.697189291&#34;,&#34;description&#34;:&#34;Bad file descriptor&#34;,&#34;errno&#34;:9,&#34;file&#34;:&#34;src/core/lib/iomgr/ev_epollex_linux.cc&#34;,&#34;file_line&#34;:950,&#34;os_error&#34;:&#34;Bad file descriptor&#34;,&#34;syscall&#34;:&#34;epoll_wait&#34;}]}
+2022-12-18 21:45:59,592 WARNING Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f6e56551a00&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;)&#39;: /api/v1/competitions/submissions/list/bike-sharing-demand
+2022-12-18 21:45:59,593 WARNING Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f6e56551c40&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;)&#39;: /api/v1/competitions/submissions/list/bike-sharing-demand
+2022-12-18 21:45:59,594 WARNING Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f6e56551d30&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;)&#39;: /api/v1/competitions/submissions/list/bike-sharing-demand
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connection.py&#34;, line 174, in _new_conn
+    conn = connection.create_connection(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/util/connection.py&#34;, line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File &#34;/home/akm/anaconda3/lib/python3.9/socket.py&#34;, line 954, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 703, in urlopen
+    httplib_response = self._make_request(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 386, in _make_request
+    self._validate_conn(conn)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 1042, in _validate_conn
+    conn.connect()
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connection.py&#34;, line 358, in connect
+    self.sock = conn = self._new_conn()
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connection.py&#34;, line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: &lt;urllib3.connection.HTTPSConnection object at 0x7f6e5653f130&gt;: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/bin/kaggle&#34;, line 10, in &lt;module&gt;
+    sys.exit(main())
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/cli.py&#34;, line 67, in main
+    out = args.func(**command_args)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api/kaggle_api_extended.py&#34;, line 609, in competition_submissions_cli
+    submissions = self.competition_submissions(competition)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api/kaggle_api_extended.py&#34;, line 581, in competition_submissions
+    self.competitions_submissions_list_with_http_info(id=competition))
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api/kaggle_api.py&#34;, line 695, in competitions_submissions_list_with_http_info
+    return self.api_client.call_api(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api_client.py&#34;, line 329, in call_api
+    return self.__call_api(resource_path, method,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api_client.py&#34;, line 161, in __call_api
+    response_data = self.request(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/api_client.py&#34;, line 351, in request
+    return self.rest_client.GET(url,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/rest.py&#34;, line 247, in GET
+    return self.request(&#34;GET&#34;, url,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/kaggle/rest.py&#34;, line 220, in request
+    r = self.pool_manager.request(method, url,
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/request.py&#34;, line 74, in request
+    return self.request_encode_url(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/request.py&#34;, line 96, in request_encode_url
+    return self.urlopen(method, url, **extra_kw)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/poolmanager.py&#34;, line 376, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 815, in urlopen
+    return self.urlopen(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 815, in urlopen
+    return self.urlopen(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 815, in urlopen
+    return self.urlopen(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/connectionpool.py&#34;, line 787, in urlopen
+    retries = retries.increment(
+  File &#34;/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/urllib3/util/retry.py&#34;, line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=&#39;www.kaggle.com&#39;, port=443): Max retries exceeded with url: /api/v1/competitions/submissions/list/bike-sharing-demand (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPSConnection object at 0x7f6e5653f130&gt;: Failed to establish a new connection: [Errno -2] Name or service not known&#39;))
 </pre>
 </div>
 </div>
@@ -17018,7 +17043,7 @@ AutoGluon infers your prediction problem is: &#39;regression&#39; (because dtype
 	If &#39;regression&#39; is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: [&#39;binary&#39;, &#39;multiclass&#39;, &#39;regression&#39;])
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-	Available Memory:                    5168.55 MB
+	Available Memory:                    5426.31 MB
 	Train Data (Original)  Memory Usage: 2.13 MB (0.0% of available memory)
 	Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
 	Stage 1 Generators:
@@ -17044,24 +17069,24 @@ Fitting AutoMLPipelineFeatureGenerator...
 		(&#39;int&#39;, [])                  : 4 | [&#39;humidity&#39;, &#39;hour&#39;, &#39;month&#39;, &#39;day&#39;]
 		(&#39;int&#39;, [&#39;bool&#39;])            : 2 | [&#39;holiday&#39;, &#39;workingday&#39;]
 		(&#39;int&#39;, [&#39;datetime_as_int&#39;]) : 5 | [&#39;datetime&#39;, &#39;datetime.year&#39;, &#39;datetime.month&#39;, &#39;datetime.day&#39;, &#39;datetime.dayofweek&#39;]
-	0.1s = Fit runtime
+	0.2s = Fit runtime
 	12 features in original data used to generate 16 features in processed data.
 	Train Data (Processed) Memory Usage: 1.09 MB (0.0% of available memory)
-Data preprocessing and feature engineering runtime = 0.17s ...
+Data preprocessing and feature engineering runtime = 0.26s ...
 AutoGluon will gauge predictive performance using evaluation metric: &#39;mean_squared_error&#39;
 	This metric&#39;s sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
 	To change this, specify the eval_metric parameter of Predictor()
 AutoGluon will fit 2 stack levels (L1 to L2) ...
 Fitting 11 L1 models ...
-Fitting model: KNeighborsUnif_BAG_L1 ... Training model for up to 399.79s of the 599.83s of remaining time.
+Fitting model: KNeighborsUnif_BAG_L1 ... Training model for up to 399.72s of the 599.73s of remaining time.
 	-10311.6305	 = Validation score   (-mean_squared_error)
 	0.04s	 = Training   runtime
-	0.03s	 = Validation runtime
-Fitting model: KNeighborsDist_BAG_L1 ... Training model for up to 399.67s of the 599.71s of remaining time.
+	0.04s	 = Validation runtime
+Fitting model: KNeighborsDist_BAG_L1 ... Training model for up to 399.59s of the 599.6s of remaining time.
 	-7077.0259	 = Validation score   (-mean_squared_error)
-	0.03s	 = Training   runtime
-	0.03s	 = Validation runtime
-Fitting model: LightGBMXT_BAG_L1 ... Training model for up to 399.57s of the 599.61s of remaining time.
+	0.05s	 = Training   runtime
+	0.04s	 = Validation runtime
+Fitting model: LightGBMXT_BAG_L1 ... Training model for up to 399.45s of the 599.46s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMXT_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17093,7 +17118,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBM_BAG_L1 ... Training model for up to 399.54s of the 599.58s of remaining time.
+Fitting model: LightGBM_BAG_L1 ... Training model for up to 399.4s of the 599.41s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBM_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17125,11 +17150,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: RandomForestMSE_BAG_L1 ... Training model for up to 399.5s of the 599.54s of remaining time.
+Fitting model: RandomForestMSE_BAG_L1 ... Training model for up to 399.35s of the 599.36s of remaining time.
 	-1477.9664	 = Validation score   (-mean_squared_error)
-	4.39s	 = Training   runtime
-	0.56s	 = Validation runtime
-Fitting model: CatBoost_BAG_L1 ... Training model for up to 392.7s of the 592.74s of remaining time.
+	6.42s	 = Training   runtime
+	1.16s	 = Validation runtime
+Fitting model: CatBoost_BAG_L1 ... Training model for up to 388.12s of the 588.13s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused CatBoost_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17161,11 +17186,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: ExtraTreesMSE_BAG_L1 ... Training model for up to 392.66s of the 592.7s of remaining time.
+Fitting model: ExtraTreesMSE_BAG_L1 ... Training model for up to 388.03s of the 588.04s of remaining time.
 	-1468.3959	 = Validation score   (-mean_squared_error)
-	2.41s	 = Training   runtime
-	0.58s	 = Validation runtime
-Fitting model: NeuralNetFastAI_BAG_L1 ... Training model for up to 387.71s of the 587.75s of remaining time.
+	2.97s	 = Training   runtime
+	1.08s	 = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L1 ... Training model for up to 380.9s of the 580.91s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetFastAI_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17197,7 +17222,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: XGBoost_BAG_L1 ... Training model for up to 387.68s of the 587.72s of remaining time.
+Fitting model: XGBoost_BAG_L1 ... Training model for up to 380.83s of the 580.83s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused XGBoost_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17229,7 +17254,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: NeuralNetTorch_BAG_L1 ... Training model for up to 387.64s of the 587.68s of remaining time.
+Fitting model: NeuralNetTorch_BAG_L1 ... Training model for up to 380.77s of the 580.77s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetTorch_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17261,7 +17286,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBMLarge_BAG_L1 ... Training model for up to 387.61s of the 587.65s of remaining time.
+Fitting model: LightGBMLarge_BAG_L1 ... Training model for up to 380.67s of the 580.68s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMLarge_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17313,12 +17338,12 @@ Repeating k-fold bagging: 18/20
 Repeating k-fold bagging: 19/20
 Repeating k-fold bagging: 20/20
 Completed 20/20 k-fold bagging repeats ...
-Fitting model: WeightedEnsemble_L2 ... Training model for up to 360.0s of the 587.6s of remaining time.
+Fitting model: WeightedEnsemble_L2 ... Training model for up to 360.0s of the 580.54s of remaining time.
 	-1375.1303	 = Validation score   (-mean_squared_error)
-	0.23s	 = Training   runtime
+	0.37s	 = Training   runtime
 	0.0s	 = Validation runtime
 Fitting 9 L2 models ...
-Fitting model: LightGBMXT_BAG_L2 ... Training model for up to 587.35s of the 587.34s of remaining time.
+Fitting model: LightGBMXT_BAG_L2 ... Training model for up to 580.14s of the 580.13s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMXT_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17350,7 +17375,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBM_BAG_L2 ... Training model for up to 587.31s of the 587.3s of remaining time.
+Fitting model: LightGBM_BAG_L2 ... Training model for up to 580.08s of the 580.06s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBM_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17382,11 +17407,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: RandomForestMSE_BAG_L2 ... Training model for up to 587.28s of the 587.27s of remaining time.
+Fitting model: RandomForestMSE_BAG_L2 ... Training model for up to 580.01s of the 579.99s of remaining time.
 	-1189.4422	 = Validation score   (-mean_squared_error)
-	9.11s	 = Training   runtime
-	1.17s	 = Validation runtime
-Fitting model: CatBoost_BAG_L2 ... Training model for up to 574.01s of the 574.0s of remaining time.
+	10.35s	 = Training   runtime
+	0.74s	 = Validation runtime
+Fitting model: CatBoost_BAG_L2 ... Training model for up to 566.59s of the 566.58s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused CatBoost_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17418,11 +17443,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: ExtraTreesMSE_BAG_L2 ... Training model for up to 573.96s of the 573.95s of remaining time.
+Fitting model: ExtraTreesMSE_BAG_L2 ... Training model for up to 566.53s of the 566.52s of remaining time.
 	-1141.1892	 = Validation score   (-mean_squared_error)
-	3.99s	 = Training   runtime
-	0.77s	 = Validation runtime
-Fitting model: NeuralNetFastAI_BAG_L2 ... Training model for up to 566.88s of the 566.87s of remaining time.
+	3.14s	 = Training   runtime
+	0.62s	 = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L2 ... Training model for up to 560.65s of the 560.64s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetFastAI_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17454,7 +17479,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: XGBoost_BAG_L2 ... Training model for up to 566.83s of the 566.82s of remaining time.
+Fitting model: XGBoost_BAG_L2 ... Training model for up to 560.62s of the 560.6s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused XGBoost_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17486,7 +17511,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: NeuralNetTorch_BAG_L2 ... Training model for up to 566.79s of the 566.78s of remaining time.
+Fitting model: NeuralNetTorch_BAG_L2 ... Training model for up to 560.55s of the 560.54s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetTorch_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17518,7 +17543,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBMLarge_BAG_L2 ... Training model for up to 566.74s of the 566.73s of remaining time.
+Fitting model: LightGBMLarge_BAG_L2 ... Training model for up to 560.48s of the 560.47s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMLarge_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -17570,11 +17595,11 @@ Repeating k-fold bagging: 18/20
 Repeating k-fold bagging: 19/20
 Repeating k-fold bagging: 20/20
 Completed 20/20 k-fold bagging repeats ...
-Fitting model: WeightedEnsemble_L3 ... Training model for up to 360.0s of the 566.65s of remaining time.
+Fitting model: WeightedEnsemble_L3 ... Training model for up to 360.0s of the 560.37s of remaining time.
 	-1140.3648	 = Validation score   (-mean_squared_error)
-	0.19s	 = Training   runtime
+	0.28s	 = Training   runtime
 	0.0s	 = Validation runtime
-AutoGluon training complete, total runtime = 33.58s ... Best model: &#34;WeightedEnsemble_L3&#34;
+AutoGluon training complete, total runtime = 40.06s ... Best model: &#34;WeightedEnsemble_L3&#34;
 TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;saved_models/&#34;)
 </pre>
 </div>
@@ -17611,21 +17636,32 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;sav
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/utils/plots.py:138: UserWarning: AutoGluon summary plots cannot be created because bokeh is not installed. To see plots, please do: &#34;pip install bokeh==2.0.1&#34;
+  warnings.warn(&#39;AutoGluon summary plots cannot be created because bokeh is not installed. To see plots, please do: &#34;pip install bokeh==2.0.1&#34;&#39;)
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>*** Summary of fit() ***
 Estimated performance of each model:
                     model     score_val  pred_time_val   fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
-0     WeightedEnsemble_L3  -1140.364806       3.145373  20.174043                0.000738           0.193162            3       True          8
-1    ExtraTreesMSE_BAG_L2  -1141.189152       1.974298  10.867888                0.770261           3.986766            2       True          7
-2  RandomForestMSE_BAG_L2  -1189.442209       2.374373  15.994116                1.170337           9.112993            2       True          6
-3     WeightedEnsemble_L2  -1375.130337       1.177249   7.070773                0.000646           0.231975            2       True          5
-4    ExtraTreesMSE_BAG_L1  -1468.395885       0.580283   2.412981                0.580283           2.412981            1       True          4
-5  RandomForestMSE_BAG_L1  -1477.966447       0.564278   4.394075                0.564278           4.394075            1       True          3
-6   KNeighborsDist_BAG_L1  -7077.025927       0.032042   0.031743                0.032042           0.031743            1       True          2
-7   KNeighborsUnif_BAG_L1 -10311.630549       0.027433   0.042325                0.027433           0.042325            1       True          1
+0     WeightedEnsemble_L3  -1140.364806       3.665638  23.238964                0.001249           0.278083            3       True          8
+1    ExtraTreesMSE_BAG_L2  -1141.189152       2.924972  12.612515                0.615029           3.140936            2       True          7
+2  RandomForestMSE_BAG_L2  -1189.442209       3.049361  19.819945                0.739418          10.348366            2       True          6
+3     WeightedEnsemble_L2  -1375.130337       2.273342   9.801385                0.000816           0.373039            2       True          5
+4    ExtraTreesMSE_BAG_L1  -1468.395885       1.075980   2.966693                1.075980           2.966693            1       True          4
+5  RandomForestMSE_BAG_L1  -1477.966447       1.160579   6.415203                1.160579           6.415203            1       True          3
+6   KNeighborsDist_BAG_L1  -7077.025927       0.035967   0.046450                0.035967           0.046450            1       True          2
+7   KNeighborsUnif_BAG_L1 -10311.630549       0.037417   0.043233                0.037417           0.043233            1       True          1
 Number of models trained: 8
 Types of models trained:
-{&#39;StackerEnsembleModel_XT&#39;, &#39;StackerEnsembleModel_RF&#39;, &#39;StackerEnsembleModel_KNN&#39;, &#39;WeightedEnsembleModel&#39;}
+{&#39;StackerEnsembleModel_RF&#39;, &#39;StackerEnsembleModel_KNN&#39;, &#39;StackerEnsembleModel_XT&#39;, &#39;WeightedEnsembleModel&#39;}
 Bagging used: True  (with 8 folds)
 Multi-layer stack-ensembling used: True  (with 3 levels)
 Feature Metadata (Processed):
@@ -17636,17 +17672,6 @@ Feature Metadata (Processed):
 (&#39;int&#39;, [&#39;bool&#39;])            : 2 | [&#39;holiday&#39;, &#39;workingday&#39;]
 (&#39;int&#39;, [&#39;datetime_as_int&#39;]) : 5 | [&#39;datetime&#39;, &#39;datetime.year&#39;, &#39;datetime.month&#39;, &#39;datetime.day&#39;, &#39;datetime.dayofweek&#39;]
 *** End of fit() summary ***
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/media/akm/My Work/Programming/virt-env/aws-udacity/lib/python3.9/site-packages/autogluon/core/utils/plots.py:138: UserWarning: AutoGluon summary plots cannot be created because bokeh is not installed. To see plots, please do: &#34;pip install bokeh==2.0.1&#34;
-  warnings.warn(&#39;AutoGluon summary plots cannot be created because bokeh is not installed. To see plots, please do: &#34;pip install bokeh==2.0.1&#34;&#39;)
 </pre>
 </div>
 </div>
@@ -17683,22 +17708,22 @@ Feature Metadata (Processed):
   &#39;RandomForestMSE_BAG_L2&#39;: &#39;saved_models/models/RandomForestMSE_BAG_L2/&#39;,
   &#39;ExtraTreesMSE_BAG_L2&#39;: &#39;saved_models/models/ExtraTreesMSE_BAG_L2/&#39;,
   &#39;WeightedEnsemble_L3&#39;: &#39;saved_models/models/WeightedEnsemble_L3/&#39;},
- &#39;model_fit_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.04232454299926758,
-  &#39;KNeighborsDist_BAG_L1&#39;: 0.03174304962158203,
-  &#39;RandomForestMSE_BAG_L1&#39;: 4.3940746784210205,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: 2.412980556488037,
-  &#39;WeightedEnsemble_L2&#39;: 0.23197507858276367,
-  &#39;RandomForestMSE_BAG_L2&#39;: 9.112993001937866,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: 3.9867656230926514,
-  &#39;WeightedEnsemble_L3&#39;: 0.1931617259979248},
- &#39;model_pred_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.027433395385742188,
-  &#39;KNeighborsDist_BAG_L1&#39;: 0.03204202651977539,
-  &#39;RandomForestMSE_BAG_L1&#39;: 0.5642781257629395,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: 0.5802829265594482,
-  &#39;WeightedEnsemble_L2&#39;: 0.0006458759307861328,
-  &#39;RandomForestMSE_BAG_L2&#39;: 1.1703367233276367,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: 0.770261287689209,
-  &#39;WeightedEnsemble_L3&#39;: 0.0007383823394775391},
+ &#39;model_fit_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.04323267936706543,
+  &#39;KNeighborsDist_BAG_L1&#39;: 0.04645037651062012,
+  &#39;RandomForestMSE_BAG_L1&#39;: 6.415202617645264,
+  &#39;ExtraTreesMSE_BAG_L1&#39;: 2.966693162918091,
+  &#39;WeightedEnsemble_L2&#39;: 0.37303900718688965,
+  &#39;RandomForestMSE_BAG_L2&#39;: 10.348366022109985,
+  &#39;ExtraTreesMSE_BAG_L2&#39;: 3.1409361362457275,
+  &#39;WeightedEnsemble_L3&#39;: 0.27808284759521484},
+ &#39;model_pred_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.037416696548461914,
+  &#39;KNeighborsDist_BAG_L1&#39;: 0.03596663475036621,
+  &#39;RandomForestMSE_BAG_L1&#39;: 1.160578966140747,
+  &#39;ExtraTreesMSE_BAG_L1&#39;: 1.0759804248809814,
+  &#39;WeightedEnsemble_L2&#39;: 0.0008161067962646484,
+  &#39;RandomForestMSE_BAG_L2&#39;: 0.7394177913665771,
+  &#39;ExtraTreesMSE_BAG_L2&#39;: 0.6150288581848145,
+  &#39;WeightedEnsemble_L3&#39;: 0.0012488365173339844},
  &#39;num_bag_folds&#39;: 8,
  &#39;max_stack_level&#39;: 3,
  &#39;model_hyperparams&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: {&#39;use_orig_features&#39;: True,
@@ -17740,24 +17765,24 @@ Feature Metadata (Processed):
    &#39;max_base_models_per_type&#39;: 5,
    &#39;save_bag_folds&#39;: True}},
  &#39;leaderboard&#39;:                     model     score_val  pred_time_val   fit_time  \
- 0     WeightedEnsemble_L3  -1140.364806       3.145373  20.174043   
- 1    ExtraTreesMSE_BAG_L2  -1141.189152       1.974298  10.867888   
- 2  RandomForestMSE_BAG_L2  -1189.442209       2.374373  15.994116   
- 3     WeightedEnsemble_L2  -1375.130337       1.177249   7.070773   
- 4    ExtraTreesMSE_BAG_L1  -1468.395885       0.580283   2.412981   
- 5  RandomForestMSE_BAG_L1  -1477.966447       0.564278   4.394075   
- 6   KNeighborsDist_BAG_L1  -7077.025927       0.032042   0.031743   
- 7   KNeighborsUnif_BAG_L1 -10311.630549       0.027433   0.042325   
+ 0     WeightedEnsemble_L3  -1140.364806       3.665638  23.238964   
+ 1    ExtraTreesMSE_BAG_L2  -1141.189152       2.924972  12.612515   
+ 2  RandomForestMSE_BAG_L2  -1189.442209       3.049361  19.819945   
+ 3     WeightedEnsemble_L2  -1375.130337       2.273342   9.801385   
+ 4    ExtraTreesMSE_BAG_L1  -1468.395885       1.075980   2.966693   
+ 5  RandomForestMSE_BAG_L1  -1477.966447       1.160579   6.415203   
+ 6   KNeighborsDist_BAG_L1  -7077.025927       0.035967   0.046450   
+ 7   KNeighborsUnif_BAG_L1 -10311.630549       0.037417   0.043233   
  
     pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  \
- 0                0.000738           0.193162            3       True   
- 1                0.770261           3.986766            2       True   
- 2                1.170337           9.112993            2       True   
- 3                0.000646           0.231975            2       True   
- 4                0.580283           2.412981            1       True   
- 5                0.564278           4.394075            1       True   
- 6                0.032042           0.031743            1       True   
- 7                0.027433           0.042325            1       True   
+ 0                0.001249           0.278083            3       True   
+ 1                0.615029           3.140936            2       True   
+ 2                0.739418          10.348366            2       True   
+ 3                0.000816           0.373039            2       True   
+ 4                1.075980           2.966693            1       True   
+ 5                1.160579           6.415203            1       True   
+ 6                0.035967           0.046450            1       True   
+ 7                0.037417           0.043233            1       True   
  
     fit_order  
  0          8  
@@ -17940,7 +17965,7 @@ Name: count, dtype: float64</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>100%|████████████████████████████████████████| 188k/188k [00:03&lt;00:00, 63.5kB/s]
+<pre>100%|████████████████████████████████████████| 188k/188k [00:29&lt;00:00, 6.47kB/s]
 Successfully submitted to Bike Sharing Demand</pre>
 </div>
 </div>
@@ -17979,10 +18004,10 @@ Successfully submitted to Bike Sharing Demand</pre>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>fileName                            date                 description                        status    publicScore  privateScore  
 ----------------------------------  -------------------  ---------------------------------  --------  -----------  ------------  
+submission_added_new_features_.csv  2022-12-18 19:47:39  new features                       complete  0.64129      0.64129       
+submission_new_hpo.csv              2022-12-18 15:10:23  new features with hyperparameters  complete  0.64129      0.64129       
 submission_added_new_features_.csv  2022-12-18 15:09:07  new features                       complete  0.64129      0.64129       
 submission.csv                      2022-12-18 15:08:23  first raw submission               complete  1.84008      1.84008       
-submission.csv                      2022-12-18 15:04:41  first raw submission               complete  1.83709      1.83709       
-submission_added_new_features_.csv  2022-12-18 15:03:52  new features                       complete  0.63296      0.63296       
 </pre>
 </div>
 </div>
@@ -17998,7 +18023,7 @@ submission_added_new_features_.csv  2022-12-18 15:03:52  new features           
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="New-Score-of-0.65378">New Score of <code>0.65378</code><a class="anchor-link" href="#New-Score-of-0.65378">&#182;</a></h4>
+<h4 id="New-Score-of-0.64129">New Score of <code>0.64129</code><a class="anchor-link" href="#New-Score-of-0.64129">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -18027,7 +18052,7 @@ submission_added_new_features_.csv  2022-12-18 15:03:52  new features           
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictor_new_hpo</span> <span class="o">=</span> <span class="n">TabularPredictor</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
-                            <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;mean_squared_error&#39;</span><span class="p">,</span>
+                            <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;mean_absolute_error&#39;</span><span class="p">,</span>
                             <span class="n">path</span><span class="o">=</span><span class="n">model_save_path</span>
                                             <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">,</span>
                                                <span class="n">time_limit</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
@@ -18070,7 +18095,7 @@ AutoGluon infers your prediction problem is: &#39;regression&#39; (because dtype
 	If &#39;regression&#39; is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: [&#39;binary&#39;, &#39;multiclass&#39;, &#39;regression&#39;])
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-	Available Memory:                    5156.93 MB
+	Available Memory:                    5571.54 MB
 	Train Data (Original)  Memory Usage: 2.13 MB (0.0% of available memory)
 	Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
 	Stage 1 Generators:
@@ -18099,21 +18124,21 @@ Fitting AutoMLPipelineFeatureGenerator...
 	0.1s = Fit runtime
 	12 features in original data used to generate 16 features in processed data.
 	Train Data (Processed) Memory Usage: 1.09 MB (0.0% of available memory)
-Data preprocessing and feature engineering runtime = 0.18s ...
-AutoGluon will gauge predictive performance using evaluation metric: &#39;mean_squared_error&#39;
+Data preprocessing and feature engineering runtime = 0.16s ...
+AutoGluon will gauge predictive performance using evaluation metric: &#39;mean_absolute_error&#39;
 	This metric&#39;s sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
 	To change this, specify the eval_metric parameter of Predictor()
 AutoGluon will fit 2 stack levels (L1 to L2) ...
 Fitting 11 L1 models ...
-Fitting model: KNeighborsUnif_BAG_L1 ... Training model for up to 399.78s of the 599.82s of remaining time.
-	-10311.6305	 = Validation score   (-mean_squared_error)
+Fitting model: KNeighborsUnif_BAG_L1 ... Training model for up to 399.79s of the 599.83s of remaining time.
+	-64.7379	 = Validation score   (-mean_absolute_error)
 	0.04s	 = Training   runtime
 	0.03s	 = Validation runtime
-Fitting model: KNeighborsDist_BAG_L1 ... Training model for up to 399.68s of the 599.71s of remaining time.
-	-7077.0259	 = Validation score   (-mean_squared_error)
+Fitting model: KNeighborsDist_BAG_L1 ... Training model for up to 399.68s of the 599.73s of remaining time.
+	-52.0474	 = Validation score   (-mean_absolute_error)
 	0.03s	 = Training   runtime
 	0.03s	 = Validation runtime
-Fitting model: LightGBMXT_BAG_L1 ... Training model for up to 399.58s of the 599.62s of remaining time.
+Fitting model: LightGBMXT_BAG_L1 ... Training model for up to 399.59s of the 599.63s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMXT_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18145,7 +18170,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBM_BAG_L1 ... Training model for up to 399.54s of the 599.58s of remaining time.
+Fitting model: LightGBM_BAG_L1 ... Training model for up to 399.56s of the 599.6s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBM_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18177,11 +18202,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: RandomForestMSE_BAG_L1 ... Training model for up to 399.52s of the 599.55s of remaining time.
-	-1477.9664	 = Validation score   (-mean_squared_error)
-	4.82s	 = Training   runtime
-	0.56s	 = Validation runtime
-Fitting model: CatBoost_BAG_L1 ... Training model for up to 392.38s of the 592.42s of remaining time.
+Fitting model: RandomForestMSE_BAG_L1 ... Training model for up to 399.53s of the 599.57s of remaining time.
+	-23.1298	 = Validation score   (-mean_absolute_error)
+	4.42s	 = Training   runtime
+	0.53s	 = Validation runtime
+Fitting model: CatBoost_BAG_L1 ... Training model for up to 392.64s of the 592.68s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused CatBoost_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18213,11 +18238,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: ExtraTreesMSE_BAG_L1 ... Training model for up to 392.35s of the 592.39s of remaining time.
-	-1468.3959	 = Validation score   (-mean_squared_error)
+Fitting model: ExtraTreesMSE_BAG_L1 ... Training model for up to 392.61s of the 592.65s of remaining time.
+	-24.1153	 = Validation score   (-mean_absolute_error)
 	2.18s	 = Training   runtime
 	0.52s	 = Validation runtime
-Fitting model: NeuralNetFastAI_BAG_L1 ... Training model for up to 387.96s of the 587.99s of remaining time.
+Fitting model: NeuralNetFastAI_BAG_L1 ... Training model for up to 388.15s of the 588.19s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetFastAI_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18249,7 +18274,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: XGBoost_BAG_L1 ... Training model for up to 387.93s of the 587.97s of remaining time.
+Fitting model: XGBoost_BAG_L1 ... Training model for up to 388.11s of the 588.15s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused XGBoost_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18281,7 +18306,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: NeuralNetTorch_BAG_L1 ... Training model for up to 387.9s of the 587.94s of remaining time.
+Fitting model: NeuralNetTorch_BAG_L1 ... Training model for up to 388.06s of the 588.1s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetTorch_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18313,7 +18338,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBMLarge_BAG_L1 ... Training model for up to 387.88s of the 587.91s of remaining time.
+Fitting model: LightGBMLarge_BAG_L1 ... Training model for up to 388.02s of the 588.06s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMLarge_BAG_L1 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18365,12 +18390,12 @@ Repeating k-fold bagging: 18/20
 Repeating k-fold bagging: 19/20
 Repeating k-fold bagging: 20/20
 Completed 20/20 k-fold bagging repeats ...
-Fitting model: WeightedEnsemble_L2 ... Training model for up to 360.0s of the 587.86s of remaining time.
-	-1375.1303	 = Validation score   (-mean_squared_error)
-	0.21s	 = Training   runtime
+Fitting model: WeightedEnsemble_L2 ... Training model for up to 360.0s of the 588.0s of remaining time.
+	-22.7579	 = Validation score   (-mean_absolute_error)
+	0.22s	 = Training   runtime
 	0.0s	 = Validation runtime
 Fitting 9 L2 models ...
-Fitting model: LightGBMXT_BAG_L2 ... Training model for up to 587.64s of the 587.63s of remaining time.
+Fitting model: LightGBMXT_BAG_L2 ... Training model for up to 587.75s of the 587.74s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMXT_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18402,7 +18427,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBM_BAG_L2 ... Training model for up to 587.6s of the 587.6s of remaining time.
+Fitting model: LightGBM_BAG_L2 ... Training model for up to 587.71s of the 587.7s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBM_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18434,11 +18459,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: RandomForestMSE_BAG_L2 ... Training model for up to 587.57s of the 587.56s of remaining time.
-	-1189.4422	 = Validation score   (-mean_squared_error)
-	8.23s	 = Training   runtime
-	0.74s	 = Validation runtime
-Fitting model: CatBoost_BAG_L2 ... Training model for up to 576.3s of the 576.29s of remaining time.
+Fitting model: RandomForestMSE_BAG_L2 ... Training model for up to 587.66s of the 587.65s of remaining time.
+	-20.9851	 = Validation score   (-mean_absolute_error)
+	7.62s	 = Training   runtime
+	0.68s	 = Validation runtime
+Fitting model: CatBoost_BAG_L2 ... Training model for up to 577.39s of the 577.38s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused CatBoost_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18470,11 +18495,11 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: ExtraTreesMSE_BAG_L2 ... Training model for up to 576.25s of the 576.24s of remaining time.
-	-1141.1892	 = Validation score   (-mean_squared_error)
-	3.79s	 = Training   runtime
-	0.78s	 = Validation runtime
-Fitting model: NeuralNetFastAI_BAG_L2 ... Training model for up to 569.21s of the 569.2s of remaining time.
+Fitting model: ExtraTreesMSE_BAG_L2 ... Training model for up to 577.34s of the 577.33s of remaining time.
+	-20.6941	 = Validation score   (-mean_absolute_error)
+	3.07s	 = Training   runtime
+	0.66s	 = Validation runtime
+Fitting model: NeuralNetFastAI_BAG_L2 ... Training model for up to 571.8s of the 571.79s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetFastAI_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18506,7 +18531,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: XGBoost_BAG_L2 ... Training model for up to 569.16s of the 569.15s of remaining time.
+Fitting model: XGBoost_BAG_L2 ... Training model for up to 571.76s of the 571.75s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused XGBoost_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18538,7 +18563,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: NeuralNetTorch_BAG_L2 ... Training model for up to 569.1s of the 569.1s of remaining time.
+Fitting model: NeuralNetTorch_BAG_L2 ... Training model for up to 571.72s of the 571.71s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused NeuralNetTorch_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18570,7 +18595,7 @@ Traceback (most recent call last):
   File &#34;python/ray/_raylet.pyx&#34;, line 1254, in ray._raylet.CoreWorker._create_put_buffer
   File &#34;python/ray/_raylet.pyx&#34;, line 179, in ray._raylet.check_status
 ray.exceptions.RaySystemError: System error: Broken pipe
-Fitting model: LightGBMLarge_BAG_L2 ... Training model for up to 569.06s of the 569.05s of remaining time.
+Fitting model: LightGBMLarge_BAG_L2 ... Training model for up to 571.68s of the 571.67s of remaining time.
 	Fitting 8 child models (S1F1 - S1F8) | Fitting with ParallelLocalFoldFittingStrategy
 	Warning: Exception caused LightGBMLarge_BAG_L2 to fail during training... Skipping this model.
 		System error: Broken pipe
@@ -18622,11 +18647,11 @@ Repeating k-fold bagging: 18/20
 Repeating k-fold bagging: 19/20
 Repeating k-fold bagging: 20/20
 Completed 20/20 k-fold bagging repeats ...
-Fitting model: WeightedEnsemble_L3 ... Training model for up to 360.0s of the 568.98s of remaining time.
-	-1140.3648	 = Validation score   (-mean_squared_error)
-	0.24s	 = Training   runtime
+Fitting model: WeightedEnsemble_L3 ... Training model for up to 360.0s of the 571.6s of remaining time.
+	-20.6606	 = Validation score   (-mean_absolute_error)
+	0.17s	 = Training   runtime
 	0.0s	 = Validation runtime
-AutoGluon training complete, total runtime = 31.29s ... Best model: &#34;WeightedEnsemble_L3&#34;
+AutoGluon training complete, total runtime = 28.6s ... Best model: &#34;WeightedEnsemble_L3&#34;
 TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;saved_models/&#34;)
 </pre>
 </div>
@@ -18666,18 +18691,18 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load(&#34;sav
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>*** Summary of fit() ***
 Estimated performance of each model:
-                    model     score_val  pred_time_val   fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
-0     WeightedEnsemble_L3  -1140.364806       2.657178  19.328114                0.000788           0.238667            3       True          8
-1    ExtraTreesMSE_BAG_L2  -1141.189152       1.916866  10.860716                0.779462           3.791912            2       True          7
-2  RandomForestMSE_BAG_L2  -1189.442209       1.876928  15.297535                0.739525           8.228731            2       True          6
-3     WeightedEnsemble_L2  -1375.130337       1.111960   7.240319                0.000591           0.207894            2       True          5
-4    ExtraTreesMSE_BAG_L1  -1468.395885       0.524672   2.176949                0.524672           2.176949            1       True          4
-5  RandomForestMSE_BAG_L1  -1477.966447       0.556344   4.823214                0.556344           4.823214            1       True          3
-6   KNeighborsDist_BAG_L1  -7077.025927       0.030353   0.032262                0.030353           0.032262            1       True          2
-7   KNeighborsUnif_BAG_L1 -10311.630549       0.026034   0.036379                0.026034           0.036379            1       True          1
+                    model  score_val  pred_time_val   fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
+0     WeightedEnsemble_L3 -20.660641       2.448338  17.536478                0.000682           0.172445            3       True          8
+1    ExtraTreesMSE_BAG_L2 -20.694059       1.767129   9.745777                0.660508           3.072036            2       True          7
+2  RandomForestMSE_BAG_L2 -20.985101       1.787148  14.291997                0.680526           7.618256            2       True          6
+3     WeightedEnsemble_L2 -22.757859       1.081870   6.860494                0.000528           0.224535            2       True          5
+4  RandomForestMSE_BAG_L1 -23.129766       0.529681   4.420275                0.529681           4.420275            1       True          3
+5    ExtraTreesMSE_BAG_L1 -24.115335       0.523966   2.182444                0.523966           2.182444            1       True          4
+6   KNeighborsDist_BAG_L1 -52.047413       0.027695   0.033241                0.027695           0.033241            1       True          2
+7   KNeighborsUnif_BAG_L1 -64.737939       0.025280   0.037782                0.025280           0.037782            1       True          1
 Number of models trained: 8
 Types of models trained:
-{&#39;StackerEnsembleModel_XT&#39;, &#39;StackerEnsembleModel_RF&#39;, &#39;StackerEnsembleModel_KNN&#39;, &#39;WeightedEnsembleModel&#39;}
+{&#39;StackerEnsembleModel_RF&#39;, &#39;StackerEnsembleModel_KNN&#39;, &#39;StackerEnsembleModel_XT&#39;, &#39;WeightedEnsembleModel&#39;}
 Bagging used: True  (with 8 folds)
 Multi-layer stack-ensembling used: True  (with 3 levels)
 Feature Metadata (Processed):
@@ -18718,14 +18743,14 @@ Feature Metadata (Processed):
   &#39;RandomForestMSE_BAG_L2&#39;: &#39;StackerEnsembleModel_RF&#39;,
   &#39;ExtraTreesMSE_BAG_L2&#39;: &#39;StackerEnsembleModel_XT&#39;,
   &#39;WeightedEnsemble_L3&#39;: &#39;WeightedEnsembleModel&#39;},
- &#39;model_performance&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: -10311.630548500909,
-  &#39;KNeighborsDist_BAG_L1&#39;: -7077.025927256795,
-  &#39;RandomForestMSE_BAG_L1&#39;: -1477.9664469364575,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: -1468.3958848990396,
-  &#39;WeightedEnsemble_L2&#39;: -1375.1303369922855,
-  &#39;RandomForestMSE_BAG_L2&#39;: -1189.4422087688058,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: -1141.189151689397,
-  &#39;WeightedEnsemble_L3&#39;: -1140.3648059923016},
+ &#39;model_performance&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: -64.73793861720571,
+  &#39;KNeighborsDist_BAG_L1&#39;: -52.047412500976314,
+  &#39;RandomForestMSE_BAG_L1&#39;: -23.129765725959295,
+  &#39;ExtraTreesMSE_BAG_L1&#39;: -24.115334641007014,
+  &#39;WeightedEnsemble_L2&#39;: -22.75785876691462,
+  &#39;RandomForestMSE_BAG_L2&#39;: -20.985100629475106,
+  &#39;ExtraTreesMSE_BAG_L2&#39;: -20.694059098487433,
+  &#39;WeightedEnsemble_L3&#39;: -20.660641116121774},
  &#39;model_best&#39;: &#39;WeightedEnsemble_L3&#39;,
  &#39;model_paths&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: &#39;saved_models/models/KNeighborsUnif_BAG_L1/&#39;,
   &#39;KNeighborsDist_BAG_L1&#39;: &#39;saved_models/models/KNeighborsDist_BAG_L1/&#39;,
@@ -18735,22 +18760,22 @@ Feature Metadata (Processed):
   &#39;RandomForestMSE_BAG_L2&#39;: &#39;saved_models/models/RandomForestMSE_BAG_L2/&#39;,
   &#39;ExtraTreesMSE_BAG_L2&#39;: &#39;saved_models/models/ExtraTreesMSE_BAG_L2/&#39;,
   &#39;WeightedEnsemble_L3&#39;: &#39;saved_models/models/WeightedEnsemble_L3/&#39;},
- &#39;model_fit_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.03637886047363281,
-  &#39;KNeighborsDist_BAG_L1&#39;: 0.03226208686828613,
-  &#39;RandomForestMSE_BAG_L1&#39;: 4.823214292526245,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: 2.1769487857818604,
-  &#39;WeightedEnsemble_L2&#39;: 0.20789361000061035,
-  &#39;RandomForestMSE_BAG_L2&#39;: 8.228731155395508,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: 3.7919118404388428,
-  &#39;WeightedEnsemble_L3&#39;: 0.23866653442382812},
- &#39;model_pred_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.026034116744995117,
-  &#39;KNeighborsDist_BAG_L1&#39;: 0.030353069305419922,
-  &#39;RandomForestMSE_BAG_L1&#39;: 0.5563440322875977,
-  &#39;ExtraTreesMSE_BAG_L1&#39;: 0.5246720314025879,
-  &#39;WeightedEnsemble_L2&#39;: 0.0005910396575927734,
-  &#39;RandomForestMSE_BAG_L2&#39;: 0.7395248413085938,
-  &#39;ExtraTreesMSE_BAG_L2&#39;: 0.7794623374938965,
-  &#39;WeightedEnsemble_L3&#39;: 0.0007877349853515625},
+ &#39;model_fit_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.037781715393066406,
+  &#39;KNeighborsDist_BAG_L1&#39;: 0.033240556716918945,
+  &#39;RandomForestMSE_BAG_L1&#39;: 4.42027473449707,
+  &#39;ExtraTreesMSE_BAG_L1&#39;: 2.1824443340301514,
+  &#39;WeightedEnsemble_L2&#39;: 0.2245347499847412,
+  &#39;RandomForestMSE_BAG_L2&#39;: 7.618255615234375,
+  &#39;ExtraTreesMSE_BAG_L2&#39;: 3.072035789489746,
+  &#39;WeightedEnsemble_L3&#39;: 0.17244505882263184},
+ &#39;model_pred_times&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: 0.025279521942138672,
+  &#39;KNeighborsDist_BAG_L1&#39;: 0.0276949405670166,
+  &#39;RandomForestMSE_BAG_L1&#39;: 0.5296814441680908,
+  &#39;ExtraTreesMSE_BAG_L1&#39;: 0.52396559715271,
+  &#39;WeightedEnsemble_L2&#39;: 0.0005283355712890625,
+  &#39;RandomForestMSE_BAG_L2&#39;: 0.6805264949798584,
+  &#39;ExtraTreesMSE_BAG_L2&#39;: 0.6605079174041748,
+  &#39;WeightedEnsemble_L3&#39;: 0.0006818771362304688},
  &#39;num_bag_folds&#39;: 8,
  &#39;max_stack_level&#39;: 3,
  &#39;model_hyperparams&#39;: {&#39;KNeighborsUnif_BAG_L1&#39;: {&#39;use_orig_features&#39;: True,
@@ -18791,33 +18816,33 @@ Feature Metadata (Processed):
    &#39;max_base_models&#39;: 25,
    &#39;max_base_models_per_type&#39;: 5,
    &#39;save_bag_folds&#39;: True}},
- &#39;leaderboard&#39;:                     model     score_val  pred_time_val   fit_time  \
- 0     WeightedEnsemble_L3  -1140.364806       2.657178  19.328114   
- 1    ExtraTreesMSE_BAG_L2  -1141.189152       1.916866  10.860716   
- 2  RandomForestMSE_BAG_L2  -1189.442209       1.876928  15.297535   
- 3     WeightedEnsemble_L2  -1375.130337       1.111960   7.240319   
- 4    ExtraTreesMSE_BAG_L1  -1468.395885       0.524672   2.176949   
- 5  RandomForestMSE_BAG_L1  -1477.966447       0.556344   4.823214   
- 6   KNeighborsDist_BAG_L1  -7077.025927       0.030353   0.032262   
- 7   KNeighborsUnif_BAG_L1 -10311.630549       0.026034   0.036379   
+ &#39;leaderboard&#39;:                     model  score_val  pred_time_val   fit_time  \
+ 0     WeightedEnsemble_L3 -20.660641       2.448338  17.536478   
+ 1    ExtraTreesMSE_BAG_L2 -20.694059       1.767129   9.745777   
+ 2  RandomForestMSE_BAG_L2 -20.985101       1.787148  14.291997   
+ 3     WeightedEnsemble_L2 -22.757859       1.081870   6.860494   
+ 4  RandomForestMSE_BAG_L1 -23.129766       0.529681   4.420275   
+ 5    ExtraTreesMSE_BAG_L1 -24.115335       0.523966   2.182444   
+ 6   KNeighborsDist_BAG_L1 -52.047413       0.027695   0.033241   
+ 7   KNeighborsUnif_BAG_L1 -64.737939       0.025280   0.037782   
  
     pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  \
- 0                0.000788           0.238667            3       True   
- 1                0.779462           3.791912            2       True   
- 2                0.739525           8.228731            2       True   
- 3                0.000591           0.207894            2       True   
- 4                0.524672           2.176949            1       True   
- 5                0.556344           4.823214            1       True   
- 6                0.030353           0.032262            1       True   
- 7                0.026034           0.036379            1       True   
+ 0                0.000682           0.172445            3       True   
+ 1                0.660508           3.072036            2       True   
+ 2                0.680526           7.618256            2       True   
+ 3                0.000528           0.224535            2       True   
+ 4                0.529681           4.420275            1       True   
+ 5                0.523966           2.182444            1       True   
+ 6                0.027695           0.033241            1       True   
+ 7                0.025280           0.037782            1       True   
  
     fit_order  
  0          8  
  1          7  
  2          6  
  3          5  
- 4          4  
- 5          3  
+ 4          3  
+ 5          4  
  6          2  
  7          1  }</pre>
 </div>
@@ -18914,13 +18939,13 @@ Feature Metadata (Processed):
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>count    6493.000000
-mean      167.068100
-std       144.298798
-min         2.415738
-25%        50.990875
-50%       134.884323
-75%       240.479462
-max       837.594360
+mean      167.576614
+std       145.363419
+min         2.424815
+25%        50.433331
+50%       135.005188
+75%       242.029266
+max       846.048889
 Name: count, dtype: float64</pre>
 </div>
 
@@ -19010,7 +19035,7 @@ Name: count, dtype: float64</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>100%|████████████████████████████████████████| 188k/188k [00:02&lt;00:00, 73.3kB/s]
+<pre>100%|████████████████████████████████████████| 188k/188k [00:06&lt;00:00, 27.7kB/s]
 Successfully submitted to Bike Sharing Demand</pre>
 </div>
 </div>
@@ -19049,10 +19074,10 @@ Successfully submitted to Bike Sharing Demand</pre>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>fileName                            date                 description                        status    publicScore  privateScore  
 ----------------------------------  -------------------  ---------------------------------  --------  -----------  ------------  
+submission_new_hpo.csv              2022-12-18 19:49:00  new features with hyperparameters  complete  0.63296      0.63296       
+submission_added_new_features_.csv  2022-12-18 19:47:39  new features                       complete  0.64129      0.64129       
 submission_new_hpo.csv              2022-12-18 15:10:23  new features with hyperparameters  complete  0.64129      0.64129       
 submission_added_new_features_.csv  2022-12-18 15:09:07  new features                       complete  0.64129      0.64129       
-submission.csv                      2022-12-18 15:08:23  first raw submission               complete  1.84008      1.84008       
-submission.csv                      2022-12-18 15:04:41  first raw submission               complete  1.83709      1.83709       
 </pre>
 </div>
 </div>
@@ -19068,7 +19093,7 @@ submission.csv                      2022-12-18 15:04:41  first raw submission   
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="New-Score-of-0.65378">New Score of <code>0.65378</code><a class="anchor-link" href="#New-Score-of-0.65378">&#182;</a></h4>
+<h4 id="New-Score-of-0.63296">New Score of <code>0.63296</code><a class="anchor-link" href="#New-Score-of-0.63296">&#182;</a></h4>
 </div>
 </div>
 </div>
